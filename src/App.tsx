@@ -1,38 +1,60 @@
-import { Dashboard } from './Dashboard';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-  Navigate
-} from "react-router-dom";
-import { Onboard } from './examples/Onboard';
-import { BatchExample } from './examples/BatchExample';
+import Login from "./pages/Login";
+import Onboarding from "./pages/Onboarding";
+import Layout from "./Layout";
+import Header from "./components/Header"
 
-
-const links = [
-  { path: '/gas-free', label: 'Onboard', element: <Onboard /> },
-  // { path: '/bundle', label: 'Bundle Transactions', element: <BatchExample /> },
-];
+import './index.css'
+import WorldId from './components/WorldId';
+import Location from './components/Location';
+import Tracking from './components/Tracking';
+import SelectRates from './components/SelectRates';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Dashboard children={<Outlet />}
-      links={links} />,
-    errorElement: <Navigate to={'/'} replace />,
+    element: <Login />
+  },
+  {
+    path: '/homepage',
+    element: <Layout><Outlet/></Layout>,
     children: [
       {
         index: true,
-        element: <Navigate to={links[0].path} replace />
+        element: <Onboarding/>
       },
-      ...links
+      {
+        path: '/homepage/location',
+        element: <Location/>
+      },
+      {
+        path: '/homepage/tracking',
+        element: <Tracking/>
+      },
+      {
+        path: '/homepage/selectrates',
+        element: <SelectRates/>
+      }
+        ]
+      }
     ]
-  }
-]);
+);
+
+function LayoutComponent() {
+  return (
+    <div>
+      <header>Header Content</header>
+      <main>
+        <Outlet /> {/* Nested routes render here */}
+      </main>
+      <footer>Footer Content</footer>
+    </div>
+  );
+}
 
 function App() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }
 
 export default App;

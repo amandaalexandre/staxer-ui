@@ -1,9 +1,8 @@
-import '@rainbow-me/rainbowkit/styles.css'
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
+import reportWebVitals from './reportWebVitals';
 import ZeroDevWrapper from './ZeroDevWrapper';
 import { NotificationsProvider } from '@mantine/notifications';
 
@@ -13,7 +12,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
+    <MantineProvider theme={{ colorScheme: 'light' }} withGlobalStyles withNormalizeCSS>
       <NotificationsProvider>
         <ZeroDevWrapper>
           <App />
